@@ -58,5 +58,6 @@ class ShazamService
         description: artist_data['description']
       }
     end
+    artists
   end
 end
