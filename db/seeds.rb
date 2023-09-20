@@ -1,7 +1,16 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+# Define a method to create artists
+def create_artists(query)
+  shazam_service = ShazamService.new
+  artists_data = shazam_service.search_artists(query)
+
+  artists_data.each do |artist_data|
+    Artist.create(artist_data)
+  end
+end
+
+# Seed artists
+artist_queries = ['artist1', 'artist2', ..., 'artist20']
+artist_queries.each do |query|
+  create_artists(query)
+end
+

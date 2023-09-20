@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  root "music#index"
+  root "musics#index"
 
-  resources :artist, only: %i[index show]
-  resources :music, only: %i[index show]
+  resources :artists, only: %i[index show]
+  resources :musics, only: %i[index show]
 end
