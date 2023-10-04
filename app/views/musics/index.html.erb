@@ -1,1 +1,12 @@
-<h2>index musics</h2>
+<h2> Music index</h2>
+<h3>Music Results</h3>
+
+<ul>
+  <% @music_results.each do |music| %>
+    <li>
+      <strong>Title:</strong> <%= music[:title] %><br>
+      <strong>Subtitle:</strong> <%= music[:subtitle] %><br>
+      <!-- Display other music details as needed -->
+    </li>
+  <% end %>
+</ul>

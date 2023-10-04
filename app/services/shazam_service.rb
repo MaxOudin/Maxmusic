@@ -1,3 +1,5 @@
+require 'httparty'
+
 class ShazamService
   include HTTParty
   base_uri 'https://shazam.p.rapidapi.com'

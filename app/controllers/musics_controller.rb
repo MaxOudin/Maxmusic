@@ -6,8 +6,12 @@ class MusicsController < ApplicationController
   end
 
   def index
-    @music = ShazamService.new.search_music('query') # Replace 'query' with your desired search term
-    # Process and display the @music data in your index view
-    @musics = Music.all
+    # Example: Fetching some default music data
+    @music_results = [
+      { title: 'Song 1', subtitle: 'Subtitle 1' },
+      { title: 'Song 2', subtitle: 'Subtitle 2' }
+    ]
+    # @music = ShazamService.new.search_music('query')
+    # @musics = Music.all
   end
 end
