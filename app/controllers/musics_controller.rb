@@ -6,12 +6,7 @@ class MusicsController < ApplicationController
   end
 
   def index
-    # Example: Fetching some default music data
-    @music_results = [
-      { title: 'Song 1', subtitle: 'Subtitle 1' },
-      { title: 'Song 2', subtitle: 'Subtitle 2' }
-    ]
-    # @music = ShazamService.new.search_music('query')
-    # @musics = Music.all
+    shazam_service = ShazamService.new
+    @music = shazam_service.display_songs
   end
 end

@@ -257,6 +257,7 @@ DEPENDENCIES
   bootstrap (~> 5.2)
   capybara
   debug
+  dotenv
   dotenv-rails
   font-awesome-sass (~> 6.1)
   httparty

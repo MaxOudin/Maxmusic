@@ -1,4 +1,9 @@
 require 'httparty'
+require "json"
+require "open-uri"
+require 'dotenv/load'
+require 'nokogiri'
+require 'net/http'
 
 class ShazamService
   include HTTParty
@@ -7,59 +12,34 @@ class ShazamService
   def initialize
     @headers = {
       'X-RapidAPI-Host' => 'shazam.p.rapidapi.com',
-      'X-RapidAPI-Key' => ENV['X-RapidAPI-Key']
+      'X-RapidAPI-Key' => '29245d9df2msh5817850eb5d8201p16adbdjsn1c938bb3fb4a'
     }
   end
 
-  def search_music(query)
-    response = self.class.get("/search", headers: @headers, query: { term: query })
-    return [] unless response.success?
+  def display_songs
+    url = URI("https://shazam.p.rapidapi.com/songs/get-details?key=40333609&locale=en-US")
 
-    parse_music_response(response)
-  end
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
 
-  def search_artists(query)
-    response = self.class.get("/search", headers: @headers, query: { term: query, type: 'artist' })
-    return [] unless response.success?
+    request = Net::HTTP::Get.new(url)
+    request["X-RapidAPI-Key"] = '29245d9df2msh5817850eb5d8201p16adbdjsn1c938bb3fb4a'
+    request["X-RapidAPI-Host"] = 'shazam.p.rapidapi.com'
 
-    parse_artist_response(response)
+    response = http.request(request)
+    response.read_body
+    track = JSON.parse(response.read_body)
   end
 
   private
 
-  def parse_music_response(response)
-    # Parse the response to extract relevant music information
-    parsed_response = response.parsed_response
+        # title: track['title'],
+        # subtitle: track['subtitle'],
+        # cover_url: track['images']['coverart'],
+        # shazam_url: track['url'],
+        # genre: track['hub']['actions'][0]['name'], # Modify this to get the correct genre information
+        # album: track['hub']['displayname'], # Modify this to get the correct album information
+        # release_year: track['highlight']['description'], # Modify this to get the correct release year information
+        # youtube_url: track['hub']['options'][0]['actions'][0]['uri'] # Modify this to get the correct YouTube URL
 
-    # Check if the required data is present in the response
-    return [] unless parsed_response['tracks'].present?
-
-    # Extract relevant music information
-    parsed_response['tracks'].map do |track|
-      {
-        title: track['title'],
-        subtitle: track['subtitle'],
-        cover_url: track['images']['coverart'],
-        shazam_url: track['url'],
-        genre: track['hub']['actions'][0]['name'], # Modify this to get the correct genre information
-        album: track['hub']['displayname'], # Modify this to get the correct album information
-        release_year: track['highlight']['description'], # Modify this to get the correct release year information
-        youtube_url: track['hub']['options'][0]['actions'][0]['uri'] # Modify this to get the correct YouTube URL
-      }
-    end
-  end
-
-  def parse_artist_response(response)
-    artists = []
-    # Parse the response to extract artist data
-    # Adjust this based on the actual response structure from Shazam API
-    response['artists'].each do |artist_data|
-      artists << {
-        name: artist_data['name'],
-        composer: artist_data['composer'],
-        description: artist_data['description']
-      }
-    end
-    artists
-  end
 end

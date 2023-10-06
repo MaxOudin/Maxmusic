@@ -1,12 +1,23 @@
-<h2> Music index</h2>
-<h3>Music Results</h3>
+<h2>All Music Tracks</h2>
 
-<ul>
-  <% @music_results.each do |music| %>
-    <li>
-      <strong>Title:</strong> <%= music[:title] %><br>
-      <strong>Subtitle:</strong> <%= music[:subtitle] %><br>
-      <!-- Display other music details as needed -->
-    </li>
-  <% end %>
-</ul>
+<%# <% @music_results.each do |music| %>
+  <div class="music-item">
+    <h3><%= @music['title'] %></h3>
+    <p>Subtitle: <%= @music['subtitle'] %></p>
+    <p>Genre: <%= @music['genres']['primary'] %></p>
+    <p>Album: <%= @music['hub']['displayname'] %></p>
+    <p>Release Year: <%= @music['sections'][0]['metadata'][2]['text'] %></p>
+
+    <!-- Display artwork -->
+    <img src="<%= @music['images']['coverart'] %>" alt="Album Cover" width="100">
+
+    <!-- Listen sample music -->
+    <a href="<%= @music['hub']['actions'][1]['uri'] %>">Listen sample</a>
+
+    <!-- Link to Shazam -->
+    <a href="<%= @music['url'] %>">Listen on Shazam</a>
+
+    <!-- Link to YouTube -->
+    <a href="<%= @music['sections'][1]['youtubeurl']['uri'] %>">Watch on YouTube</a>
+  </div>
+<%# <% end %>
