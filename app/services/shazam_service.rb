@@ -12,7 +12,7 @@ class ShazamService
   def initialize
     @headers = {
       'X-RapidAPI-Host' => 'shazam.p.rapidapi.com',
-      'X-RapidAPI-Key' => '29245d9df2msh5817850eb5d8201p16adbdjsn1c938bb3fb4a'
+      'X-RapidAPI-Key' => ''
     }
   end
 
@@ -23,7 +23,7 @@ class ShazamService
     http.use_ssl = true
 
     request = Net::HTTP::Get.new(url)
-    request["X-RapidAPI-Key"] = '29245d9df2msh5817850eb5d8201p16adbdjsn1c938bb3fb4a'
+    request["X-RapidAPI-Key"] = ''
     request["X-RapidAPI-Host"] = 'shazam.p.rapidapi.com'
 
     response = http.request(request)
