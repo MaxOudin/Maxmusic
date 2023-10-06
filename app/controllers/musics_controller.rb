@@ -7,6 +7,6 @@ class MusicsController < ApplicationController
 
   def index
     shazam_service = ShazamService.new
-    @music = shazam_service.display_songs
+    @music = shazam_service.display_song
   end
 end

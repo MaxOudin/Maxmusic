@@ -12,18 +12,18 @@ class ShazamService
   def initialize
     @headers = {
       'X-RapidAPI-Host' => 'shazam.p.rapidapi.com',
-      'X-RapidAPI-Key' => ''
+      'X-RapidAPI-Key' => ENV["RAPIDAPI_KEY"]
     }
   end
 
-  def display_songs
+  def display_song
     url = URI("https://shazam.p.rapidapi.com/songs/get-details?key=40333609&locale=en-US")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
 
     request = Net::HTTP::Get.new(url)
-    request["X-RapidAPI-Key"] = ''
+    request["X-RapidAPI-Key"] = ENV["RAPIDAPI_KEY"]
     request["X-RapidAPI-Host"] = 'shazam.p.rapidapi.com'
 
     response = http.request(request)
@@ -31,8 +31,15 @@ class ShazamService
     track = JSON.parse(response.read_body)
   end
 
+  def display_artist(artist)
+
+  end
+
   private
 
+  def parse_url
+
+  end
         # title: track['title'],
         # subtitle: track['subtitle'],
         # cover_url: track['images']['coverart'],

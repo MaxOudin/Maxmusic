@@ -7,5 +7,10 @@ class ArtistsController < ApplicationController
 
   def index
     @artists = Artist.all
+    shazam_service = ShazamService.new
+    @artists_sug = @artists.sample(4)
+    @artists_sug.each do |artist|
+      shazam_service.display_artist(artist)
+    end
   end
 end
