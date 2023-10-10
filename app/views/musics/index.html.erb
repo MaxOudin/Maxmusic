@@ -1,39 +1,41 @@
 <h2>All Music Tracks</h2>
 
-<%# <% @music_results.each do |music| %>
-  <div class="music-item">
-    <h3><%= @music['title'] %></h3>
-    <p>Artist: <%= @music['subtitle'] %></p>
-    <p>Genre: <%= @music['genres']['primary'] %></p>
-    <p>Release Year: <%= @music['sections'][0]['metadata'][2]['text'] %></p>
-
-    <!-- Display artwork -->
-    <img src="<%= @music['images']['coverart'] %>" alt="Album Cover" width="100">
-
-    <!-- Link to Shazam -->
-    <a href="<%= @music['url'] %>"
-       target="_blank">Listen on Shazam</a>
-
-    <!-- Link to YouTube -->
-    <a href="<%= @music['sections'][1]['youtubeurl']['actions'][0]['uri'] %>"
-       target="_blank">Watch video on YouTube</a>
-  </div>
+<% @music_results.each do |music| %>
   <div>
-      <button class="btn btn-primary" onclick="playSong()">Listen song</button>
+    <% @music = @shazam_service.display_song(music) %>
+    <div class="music-item">
+      <h3><%= @music['title'] %></h3>
+      <p>Artist: <%= @music['subtitle'] %></p>
+      <p>Genre: <%= @music['genres']['primary'] %></p>
+      <p>Release Year: <%= @music['sections'][0]['metadata'][2]['text'] %></p>
 
-      <script>
-          function playSong() {
-              var audio = new Audio("<%= @music['hub']['actions'][1]['uri'] %>");
-              audio.play();
-          }
-      </script>
+      <!-- Display artwork -->
+      <img src="<%= @music['images']['coverart'] %>" alt="Album Cover" width="100">
+
+      <!-- Link to Shazam -->
+      <a href="<%= @music['url'] %>"
+        target="_blank">Listen on Shazam</a>
+
+      <!-- Link to YouTube -->
+      <a href="<%= @music['sections'][1]['youtubeurl']['actions'][0]['uri'] %>"
+        target="_blank">Watch video on YouTube</a>
+    </div>
+    <div>
+        <%# <button class="btn btn-primary" onclick="playSong()">Listen song</button> %>
+        <i class="fa-solid fa-play" onclick="playSong()"></i>
+        <script>
+            function playSong() {
+                var audio = new Audio("<%= @music['hub']['actions'][1]['uri'] %>");
+                audio.play();
+            }
+        </script>
+    </div>
+
+    <%# Artist id %>
+    <% @music['artists'][0]['adamid'] %>
+    <%# Album id %>
+    <% @music['albumadamid'] %>
+    <%# Track Shazam id %>
+    <% @music['key'] %></p>
   </div>
-
-  <%# Artist id %>
-  <% @music['artists'][0]['adamid'] %>
-  <%# Album id %>
-  <% @music['albumadamid'] %>
-  <%# Track Shazam id %>
-  <% @music['key'] %></p>
-
-<%# <% end %>
+<% end %>

@@ -4,6 +4,7 @@ require "open-uri"
 require 'dotenv/load'
 require 'nokogiri'
 require 'net/http'
+require 'openssl'
 
 class ShazamService
   include HTTParty
@@ -16,8 +17,8 @@ class ShazamService
     }
   end
 
-  def display_song
-    url = URI("https://shazam.p.rapidapi.com/songs/get-details?key=40333609&locale=en-US")
+  def display_song(track_id)
+    url = URI("https://shazam.p.rapidapi.com/songs/get-details?key=#{track_id}&locale=en-US")
 
     http = Net::HTTP.new(url.host, url.port)
     http.use_ssl = true
@@ -27,26 +28,18 @@ class ShazamService
     request["X-RapidAPI-Host"] = 'shazam.p.rapidapi.com'
 
     response = http.request(request)
-    response.read_body
+    # if response == "<Net::HTTPServiceUnavailable 503 Service Temporarily Unavailable readbody=true>"
+      response.read_body
     track = JSON.parse(response.read_body)
   end
 
-  def display_artist(artist)
-
-  end
-
-  private
-
-  def parse_url
-
-  end
-        # title: track['title'],
-        # subtitle: track['subtitle'],
-        # cover_url: track['images']['coverart'],
-        # shazam_url: track['url'],
-        # genre: track['hub']['actions'][0]['name'], # Modify this to get the correct genre information
-        # album: track['hub']['displayname'], # Modify this to get the correct album information
-        # release_year: track['highlight']['description'], # Modify this to get the correct release year information
-        # youtube_url: track['hub']['options'][0]['actions'][0]['uri'] # Modify this to get the correct YouTube URL
-
 end
+
+    # title: track['title'],
+    # subtitle: track['subtitle'],
+    # cover_url: track['images']['coverart'],
+    # shazam_url: track['url'],
+    # genre: track['hub']['actions'][0]['name'], # Modify this to get the correct genre information
+    # album: track['hub']['displayname'], # Modify this to get the correct album information
+    # release_year: track['highlight']['description'], # Modify this to get the correct release year information
+    # youtube_url: track['hub']['options'][0]['actions'][0]['uri'] # Modify this to get the correct YouTube URL
