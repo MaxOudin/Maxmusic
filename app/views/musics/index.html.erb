@@ -9,7 +9,7 @@
   </form>
 </div>
 
-<h3>Tracks found with : <%= params[:query] %></h3>
+<h3>Tracks found with research: '<%= @query %>'</h3>
 
 <% @music_hashed['tracks']['hits'].each do |music| %>
   <% @music_array << music['track']['key'] %>
