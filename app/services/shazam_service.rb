@@ -33,6 +33,19 @@ class ShazamService
     track = JSON.parse(response.read_body)
   end
 
+  def search_music(query)
+    url = URI("https://shazam.p.rapidapi.com/search?term=#{query}&locale=en-US&offset=0&limit=5")
+
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Get.new(url)
+    request["X-RapidAPI-Key"] = ENV["RAPIDAPI_KEY"]
+    request["X-RapidAPI-Host"] = 'shazam.p.rapidapi.com'
+
+    response = http.request(request)
+    resp = response.read_body
+  end
 end
 
     # title: track['title'],

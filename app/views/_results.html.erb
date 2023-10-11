@@ -2,7 +2,7 @@
 
 <% @music_results.each do |music| %>
   <div>
-    <% @music = @shazam_service.display_song(music['track']['key']) %>
+    <% @music = @shazam_service.display_song(music) %>
     <div class="music-item">
       <h3><%= @music['title'] %></h3>
       <p>Artist: <%= @music['subtitle'] %></p>

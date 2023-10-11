@@ -5,6 +5,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "musics#index"
 
-  resources :artists, only: %i[index show]
   resources :musics, only: %i[index show]
 end
