@@ -1,5 +1,6 @@
 
 <h3>Search Music</h3>
+
 <div class="search-container">
   <form id="search-form" action="/musics/search" method="get">
     <div class="search-bar">
@@ -11,14 +12,16 @@
 
 <h3>Tracks found with research: '<%= @query %>'</h3>
 
-<% @music_hashed['tracks']['hits'].each do |music| %>
-  <% @music_array << music['track']['key'] %>
-<% end %>
-    <% @music_array.each do |track| %>
-    <% @music = @shazam_service.display_song(track) %>
+  <% @music_hashed['tracks']['hits'].each do |music| %>
+    <% @music_array << music['track']['key'] %>
+  <% end %>
+
+  <% @music_array.each do |track| %>
+  <% @music = @shazam_service.display_song(track) %>
+
   <div class="card">
     <div class="music-item">
-      <h3><%= @music['title'] %></h3>
+      <p>Title: <%= @music['title'] %></p>
       <p>Artist: <%= @music['subtitle'] %></p>
       <p>Genre: <%= @music['genres']['primary'] %></p>
       <p>Release Year: <%= @music['sections'][0]['metadata'][2]['text'] %></p>
