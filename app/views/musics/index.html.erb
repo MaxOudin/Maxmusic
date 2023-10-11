@@ -1,8 +1,22 @@
-<h3>Tracks found</h3>
 
-<% @music_results.each do |music| %>
-  <div>
-    <% @music = @shazam_service.display_song(music['track']['key']) %>
+<h3>Search Music</h3>
+<div class="search-container">
+  <form id="search-form" action="/musics/search" method="get">
+    <div class="search-bar">
+      <input type="text" name="query" placeholder="Search...">
+      <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+  </form>
+</div>
+
+<h3>Tracks found with : <%= params[:query] %></h3>
+
+<% @music_hashed['tracks']['hits'].each do |music| %>
+  <% @music_array << music['track']['key'] %>
+<% end %>
+    <% @music_array.each do |track| %>
+    <% @music = @shazam_service.display_song(track) %>
+  <div class="card">
     <div class="music-item">
       <h3><%= @music['title'] %></h3>
       <p>Artist: <%= @music['subtitle'] %></p>
@@ -17,8 +31,12 @@
         target="_blank">Listen on Shazam</a>
 
       <!-- Link to YouTube -->
-      <a href="<%= @music['sections'][1]['youtubeurl']['actions'][0]['uri'] %>"
-        target="_blank">Watch video on YouTube</a>
+      <% if @music['sections'][1]['youtubeurl'] != nil %>
+        <a href=<%= @music['sections'][1]['youtubeurl']['actions'][0]['uri']%>
+          target="_blank">Watch video on YouTube</a>
+      <% else %>
+        <p>We did not find YouTube link unfortunately</p>
+      <% end %>
     </div>
     <div>
         <%# <button class="btn btn-primary" onclick="playSong()">Listen song</button> %>

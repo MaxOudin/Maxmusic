@@ -31,6 +31,7 @@ class ShazamService
     # if response == "<Net::HTTPServiceUnavailable 503 Service Temporarily Unavailable readbody=true>"
       response.read_body
     track = JSON.parse(response.read_body)
+
   end
 
   def search_music(query)
