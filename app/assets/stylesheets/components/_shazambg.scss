@@ -1,0 +1,17 @@
+.shazam-bg {
+  min-height: 75vh;
+  width: 100%;
+  margin-bottom: 3vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shazam-bg h2 {
+  font-size: 42px;
+  text-wrap: balance;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: .5px;
+}

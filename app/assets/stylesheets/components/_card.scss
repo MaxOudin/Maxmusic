@@ -1,0 +1,25 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  height: 30vh;
+  width: 40vw;
+  overflow: hidden;
+  background-color: #F8F8F8;
+}
+
+.card-category {
+  color: white;
+  height: -webkit-fill-available;
+  object-fit: cover;
+  object-position: center;
+  background-position: center center;
+  background-repeat:no-repeat;
+  min-height: 100%;
+}
+
+.fa-solid {
+  padding: 8px;
+  border-radius: 50%;
+  border: solid 1px white;
+  color: white;
+}
