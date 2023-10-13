@@ -21,7 +21,6 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: black;
 }
 
 .card-category {
@@ -48,7 +47,8 @@
   flex-direction: column;
   justify-content: space-around;
   margin-left: 6px;
-  height: 100%;
+  margin-top: 20px;
+  margin-bottom: 12px;
 }
 
 .btn-container {

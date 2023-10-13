@@ -55,27 +55,27 @@
           <% else %>
             <p>Aucun clip YouTube référencé</p>
           <% end %>
-            <div class="btn-container">
-              <button class="btn btn-listen" style="align-items: center;" onclick="playSong()">
-                Ecouter
-              </button>
-                <script>
-                    function playSong() {
-                        var audio = new Audio("<%= @music['hub']['actions'][1]['uri'] %>");
-                        audio.play();
-                    }
-                </script>
-            </div>
+          <div class="btn-container">
+            <button class="btn btn-listen" style="align-items: center;" onclick="playSong()">
+              Ecouter
+            </button>
+              <script>
+                  function playSong() {
+                      var audio = new Audio("<%= @music['hub']['actions'][1]['uri'] %>");
+                      audio.play();
+                  }
+              </script>
+          </div>
         </div>
       </div>
 
-  <!-- Unshowed information -->
+      <!-- Unshowed information -->
       <%# Artist id %>
       <% @music['artists'][0]['adamid'] %>
       <%# Album id %>
       <% @music['albumadamid'] %>
       <%# Track Shazam id %>
       <% @music['key'] %>
-    <% end %>
+      <% end %>
     </div>
 </div>

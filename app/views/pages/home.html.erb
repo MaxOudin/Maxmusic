@@ -47,15 +47,9 @@
           <p>Aucun clip YouTube référencé</p>
         <% end %>
 
-        <button class="btn btn-listen" style="align-items: center;" onclick="playSong()">
+        <button class="btn btn-listen" style="align-items: center;">
           Ecouter
         </button>
-        <script>
-            function playSong() {
-                var audio = new Audio("<%= @music['hub']['actions'][1]['uri'] %>");
-                audio.play();
-            }
-        </script>
       </div>
 
   <!-- Unshowed information -->
