@@ -1,5 +1,5 @@
 
-<div class="shazam-bg" style= "background: linear-gradient(#00B9FC, rgb(3, 105, 255));">
+<div class="shazam-bg" style= "background: linear-gradient(#50D5B7, #067D68);">
   <div style="width: 50vw; ">
     <h2 style="text-align: center;"> Redécouvrez vos musiques préférées et recherchez les grâce à notre système de recherche
     </h2>
@@ -23,60 +23,52 @@
     <% @shazam_service = ShazamService.new  %>
     <% @music = @shazam_service.display_song('20066955') %>
   <div class="card">
+
       <!-- Display artwork -->
       <div class="col-4">
           <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= @music['images']['coverart'] %>)">
-              <%= @music['title'] %>
-            <i class="fa-solid fa-play" onclick="playSong()"></i>
-              <script>
-                  function playSong() {
-                      var audio = new Audio("<%= @music['hub']['actions'][1]['uri'] %>");
-                      audio.play();
-                  }
-              </script>
-          </div>
-          <div class="">
-            <!-- <img src="<%= @music['images']['coverart'] %>" alt="Album Cover" width="100"> -->
           </div>
       </div>
+
         <!-- Display informations -->
-      <div class="music-infos col-4">
-
-          <p>Artiste: <%= @music['subtitle'] %></p>
+      <div class="card-infos col-4">
+          <p> <strong><%= @music['title'] %></strong></p>
+          <p>De: <%= @music['subtitle'] %></p>
+          <p>Annéee: <%= @music['sections'][0]['metadata'][2]['text'] %></p>
           <p>Genre: <%= @music['genres']['primary'] %></p>
-          <p>Annéee de sortie: <%= @music['sections'][0]['metadata'][2]['text'] %></p>
-
-          <!-- Link to Shazam -->
-          <a href="<%= @music['url'] %>"
-            target="_blank">Ecouter sur Shazam</a>
-
       </div>
+
+      <div class="card-links col-4">
+        <!-- Link to Shazam -->
+        <a href="<%= @music['url'] %>"
+          target="_blank">Ecouter sur Shazam</a>
 
         <!-- Link to YouTube -->
-      <div class="col-4">
         <% if @music['sections'][1]['youtubeurl'] != nil %>
           <a href=<%= @music['sections'][1]['youtubeurl']['actions'][0]['uri']%>
             target="_blank">Regarder le clip YouTube</a>
         <% else %>
-          <p>Nous n'avons malheureusement pas trouvé de lien vers le clip YouTube</p>
+          <p>Aucun clip YouTube référencé</p>
         <% end %>
+
+        <button class="btn btn-listen" style="align-items: center;" onclick="playSong()">
+          <i class="fa-regular fa-play"></i>
+          Ecouter
+        </button>
+        <script>
+            function playSong() {
+                var audio = new Audio("<%= @music['hub']['actions'][1]['uri'] %>");
+                audio.play();
+            }
+        </script>
       </div>
 
-      <div class="col-1">
-          <%# <button class="btn btn-primary" onclick="playSong()">Ecouter</button> %>
-          <i class="fa-solid fa-play" onclick="playSong()"></i>
-          <script>
-              function playSong() {
-                  var audio = new Audio("<%= @music['hub']['actions'][1]['uri'] %>");
-                  audio.play();
-              }
-          </script>
-      </div>
-    </div>
+  <!-- Unshowed information -->
       <%# Artist id %>
       <% @music['artists'][0]['adamid'] %>
       <%# Album id %>
       <% @music['albumadamid'] %>
       <%# Track Shazam id %>
       <% @music['key'] %></p>
+  </div>
 </div>

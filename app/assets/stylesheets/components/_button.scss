@@ -1,0 +1,14 @@
+.btn-listen {
+  max-width: 100px;
+  background-color: #067D68;
+  opacity: 0.8;
+  color: white;
+  border-radius: 4px;
+}
+
+.btn:hover {
+  transition: 0.7s;
+  opacity: 1;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+}

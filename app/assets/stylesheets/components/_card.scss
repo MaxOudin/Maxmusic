@@ -8,18 +8,30 @@
 }
 
 .card-category {
-  color: white;
-  height: -webkit-fill-available;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   object-fit: cover;
   object-position: center;
-  background-position: center center;
-  background-repeat:no-repeat;
+  height: -webkit-fill-available;
   min-height: 100%;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
-.fa-solid {
-  padding: 8px;
+.card-infos {
+  align-self: center;
+  margin-left: 6px;
+}
+
+.card-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 6px;
+}
+
+.fa-play {
   border-radius: 50%;
-  border: solid 1px white;
   color: white;
 }
