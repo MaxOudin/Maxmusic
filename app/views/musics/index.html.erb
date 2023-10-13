@@ -1,16 +1,22 @@
 
-<h3>Search Music</h3>
-
-<div class="search-container">
-  <form id="search-form" action="/musics/search" method="get">
-    <div class="search-bar">
-      <input type="text" name="query" placeholder="Search...">
-      <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
-    </div>
-  </form>
+<div class="shazam-bg" style= "background: linear-gradient(#50D5B7, #067D68);">
+  <div style="width: 50vw;">
+    <h2 style="text-align: center;"> Redécouvrez vos musiques préférées et recherchez les grâce à notre système de recherche
+    </h2>
+  </div>
+  <div class="search-container">
+    <form id="search-form" action="/musics/search" method="get">
+      <div class="search-bar">
+        <input type="text" name="query" placeholder="Rechercher...">
+        <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+    </form>
+  </div>
 </div>
 
-<h3>Tracks found with research: '<%= @query %>'</h3>
+<div class="container">
+
+<h3>Musiques trouvées avec votre recherche: '<%= @query %>'</h3>
 
   <% @music_hashed['tracks']['hits'].each do |music| %>
     <% @music_array << music['track']['key'] %>
@@ -19,44 +25,53 @@
   <% @music_array.each do |track| %>
   <% @music = @shazam_service.display_song(track) %>
 
-  <div class="card">
-    <div class="music-item">
-      <p>Title: <%= @music['title'] %></p>
-      <p>Artist: <%= @music['subtitle'] %></p>
-      <p>Genre: <%= @music['genres']['primary'] %></p>
-      <p>Release Year: <%= @music['sections'][0]['metadata'][2]['text'] %></p>
+<div class="card">
 
       <!-- Display artwork -->
-      <img src="<%= @music['images']['coverart'] %>" alt="Album Cover" width="100">
+      <div class="col-4">
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= @music['images']['coverart'] %>)">
+          </div>
+      </div>
 
-      <!-- Link to Shazam -->
-      <a href="<%= @music['url'] %>"
-        target="_blank">Listen on Shazam</a>
+        <!-- Display informations -->
+      <div class="card-infos col-4">
+          <p> <strong><%= @music['title'] %></strong></p>
+          <p>De: <%= @music['subtitle'] %></p>
+          <p>Annéee: <%= @music['sections'][0]['metadata'][2]['text'] %></p>
+          <p>Genre: <%= @music['genres']['primary'] %></p>
+      </div>
 
-      <!-- Link to YouTube -->
-      <% if @music['sections'][1]['youtubeurl'] != nil %>
-        <a href=<%= @music['sections'][1]['youtubeurl']['actions'][0]['uri']%>
-          target="_blank">Watch video on YouTube</a>
-      <% else %>
-        <p>We did not find YouTube link unfortunately</p>
-      <% end %>
-    </div>
-    <div>
-        <%# <button class="btn btn-primary" onclick="playSong()">Listen song</button> %>
-        <i class="fa-solid fa-play" onclick="playSong()"></i>
+      <div class="card-links col-4">
+        <!-- Link to Shazam -->
+        <a href="<%= @music['url'] %>"
+          target="_blank">Ecouter sur Shazam</a>
+
+        <!-- Link to YouTube -->
+        <% if @music['sections'][1]['youtubeurl'] != nil %>
+          <a href=<%= @music['sections'][1]['youtubeurl']['actions'][0]['uri']%>
+            target="_blank">Regarder le clip YouTube</a>
+        <% else %>
+          <p>Aucun clip YouTube référencé</p>
+        <% end %>
+
+        <button class="btn btn-listen" style="align-items: center;" onclick="playSong()">
+          <%# <i class="fa-regular fa-play"></i> %>
+          Ecouter
+        </button>
         <script>
             function playSong() {
                 var audio = new Audio("<%= @music['hub']['actions'][1]['uri'] %>");
                 audio.play();
             }
         </script>
-    </div>
+      </div>
 
-    <%# Artist id %>
-    <% @music['artists'][0]['adamid'] %>
-    <%# Album id %>
-    <% @music['albumadamid'] %>
-    <%# Track Shazam id %>
-    <% @music['key'] %></p>
+  <!-- Unshowed information -->
+      <%# Artist id %>
+      <% @music['artists'][0]['adamid'] %>
+      <%# Album id %>
+      <% @music['albumadamid'] %>
+      <%# Track Shazam id %>
+      <% @music['key'] %></p>
   </div>
-<% end %>
+</div>
