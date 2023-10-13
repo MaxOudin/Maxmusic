@@ -14,4 +14,3 @@ I found it would be nice to find directly cover album, artist and get the possib
 Here we are getting data by parsing Shazam API with rapidapi website:
  --> https://rapidapi.com/apidojo/api/shazam/
 You would need to create an account to get your API key and be able to use the research form.
-
