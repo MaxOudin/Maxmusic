@@ -5,6 +5,14 @@
   width: 40vw;
   overflow: hidden;
   background-color: #F8F8F8;
+  margin-bottom: 8px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 12px;
 }
 
 .card-category {
@@ -24,14 +32,19 @@
   margin-left: 6px;
 }
 
+.card-infos p {
+  margin-bottom: 2px;
+}
+
 .card-links {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   margin-left: 6px;
+  height: 100%;
 }
 
-.fa-play {
-  border-radius: 50%;
-  color: white;
+.btn-container {
+  display: flex;
+  align-items: center;
 }

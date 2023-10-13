@@ -1,9 +1,10 @@
 .shazam-bg {
   min-height: 50vh;
   width: 100%;
-  margin-bottom: 3vh;
+  margin-bottom: 4vh;
   color: white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
