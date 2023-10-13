@@ -1,21 +1,20 @@
 
 <div class="shazam-bg" style= "background: linear-gradient(#50D5B7, #067D68);">
-  <div style="width: 50vw; ">
+  <div style="width: 50vw;">
     <h2 style="text-align: center;"> Redécouvrez vos musiques préférées et recherchez les grâce à notre système de recherche
     </h2>
   </div>
-</div>
-
-<div class="container">
-  <h3>Chercher une musique</h3>
   <div class="search-container">
     <form id="search-form" action="/musics/search" method="get">
       <div class="search-bar">
-        <input type="text" name="query" placeholder="Recherche...">
+        <input type="text" name="query" placeholder="Rechercher...">
         <button type="submit" class="btn-search"><i class="fa-solid fa-magnifying-glass"></i></button>
       </div>
     </form>
   </div>
+</div>
+
+<div class="container">
 
 
   <h3>!!! Test sans API !!!</h3>
@@ -52,7 +51,7 @@
         <% end %>
 
         <button class="btn btn-listen" style="align-items: center;" onclick="playSong()">
-          <i class="fa-regular fa-play"></i>
+          <%# <i class="fa-regular fa-play"></i> %>
           Ecouter
         </button>
         <script>
